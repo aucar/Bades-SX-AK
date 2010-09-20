@@ -1,0 +1,7 @@
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\bin\Release\TabCtrl.dll
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Release\ResolveAssemblyReference.cache
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Release\MyControlLibrary.TabCtlEx.resources
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Release\MyControlLibrary.TabPageEx.resources
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Release\GenerateResource.read.1.tlog
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Release\GenerateResource.write.1.tlog
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Release\TabCtrl.dll

@@ -1,0 +1,42 @@
+V:\PROJECTS\BADES\BADES\bin\Debug\BADES.exe
+V:\PROJECTS\BADES\BADES\bin\Debug\BADES.pdb
+V:\PROJECTS\BADES\BADES\obj\x86\Debug\ResolveAssemblyReference.cache
+V:\PROJECTS\BADES\BADES\obj\x86\Debug\bades.Properties.Resources.resources
+V:\PROJECTS\BADES\BADES\obj\x86\Debug\GenerateResource.read.1.tlog
+V:\PROJECTS\BADES\BADES\obj\x86\Debug\GenerateResource.write.1.tlog
+V:\PROJECTS\BADES\BADES\obj\x86\Debug\BADES.exe
+V:\PROJECTS\BADES\BADES\obj\x86\Debug\BADES.pdb
+V:\PROJECTS\BADES\BADES\obj\x86\Debug\bades.FrmBades.resources
+V:\PROJECTS\BADES\BADES\obj\x86\Debug\BADES.csproj.ResolveComReference.cache
+V:\PROJECTS\BADES\BADES\obj\x86\Debug\bades.Hakkinda.resources
+V:\PROJECTS\BADES\BADES\bin\Debug\BADES.exe.config
+C:\Users\ahmet\Desktop\BADES\bin\Debug\BADES.exe.config
+C:\Users\ahmet\Desktop\BADES\bin\Debug\BADES.exe
+C:\Users\ahmet\Desktop\BADES\bin\Debug\BADES.pdb
+C:\Users\ahmet\Desktop\BADES\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\ahmet\Desktop\BADES\obj\x86\Debug\BADES.csproj.ResolveComReference.cache
+C:\Users\ahmet\Desktop\BADES\obj\x86\Debug\bades.Hakkinda.resources
+C:\Users\ahmet\Desktop\BADES\obj\x86\Debug\bades.FrmBades.resources
+C:\Users\ahmet\Desktop\BADES\obj\x86\Debug\bades.Properties.Resources.resources
+C:\Users\ahmet\Desktop\BADES\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\ahmet\Desktop\BADES\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\ahmet\Desktop\BADES\obj\x86\Debug\BADES.exe
+C:\Users\ahmet\Desktop\BADES\obj\x86\Debug\BADES.pdb
+C:\Users\ahmet\Desktop\BADES - Copy\bin\Debug\BADES.exe.config
+C:\Users\ahmet\Desktop\BADES - Copy\obj\x86\Debug\BADES.csproj.ResolveComReference.cache
+C:\Users\ahmet\Desktop\BADES - Copy\obj\x86\Debug\BADES.exe
+C:\Users\ahmet\Desktop\BADES - Copy\obj\x86\Debug\BADES.pdb
+C:\Users\ahmet\Desktop\BADES SVN\bin\Debug\BADES.exe.config
+C:\Users\ahmet\Desktop\BADES SVN\bin\Debug\BADES.exe
+C:\Users\ahmet\Desktop\BADES SVN\bin\Debug\BADES.pdb
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\BADES.csproj.ResolveComReference.cache
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\bades.Hakkinda.resources
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\bades.FrmBades.resources
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\bades.Properties.Resources.resources
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\BADES.exe
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\BADES.pdb
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog

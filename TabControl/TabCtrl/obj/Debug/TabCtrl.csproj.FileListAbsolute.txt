@@ -1,0 +1,9 @@
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\bin\Debug\TabCtrl.dll
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\bin\Debug\TabCtrl.pdb
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Debug\ResolveAssemblyReference.cache
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Debug\MyControlLibrary.TabCtlEx.resources
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Debug\MyControlLibrary.TabPageEx.resources
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Debug\GenerateResource.read.1.tlog
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Debug\GenerateResource.write.1.tlog
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Debug\TabCtrl.dll
+V:\PROJECTS\BADES\BADES\TabControl\TabCtrl\obj\Debug\TabCtrl.pdb

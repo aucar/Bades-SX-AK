@@ -1,0 +1,36 @@
+V:\PROJECTS\BADES\BADES\bin\Release\BADES.exe
+V:\PROJECTS\BADES\BADES\bin\Release\BADES.pdb
+V:\PROJECTS\BADES\BADES\obj\x86\Release\ResolveAssemblyReference.cache
+V:\PROJECTS\BADES\BADES\obj\x86\Release\BADES.csproj.ResolveComReference.cache
+V:\PROJECTS\BADES\BADES\obj\x86\Release\bades.FrmBades.resources
+V:\PROJECTS\BADES\BADES\obj\x86\Release\bades.Properties.Resources.resources
+V:\PROJECTS\BADES\BADES\obj\x86\Release\GenerateResource.read.1.tlog
+V:\PROJECTS\BADES\BADES\obj\x86\Release\GenerateResource.write.1.tlog
+V:\PROJECTS\BADES\BADES\obj\x86\Release\BADES.exe
+V:\PROJECTS\BADES\BADES\obj\x86\Release\BADES.pdb
+V:\PROJECTS\BADES\BADES\bin\Release\BADES.exe.config
+V:\PROJECTS\BADES\BADES\obj\x86\Release\bades.Hakkinda.resources
+C:\Users\ahmet\Desktop\BADES\bin\Release\BADES.exe.config
+C:\Users\ahmet\Desktop\BADES\obj\x86\Release\BADES.csproj.ResolveComReference.cache
+C:\Users\ahmet\Desktop\BADES\obj\x86\Release\BADES.exe
+C:\Users\ahmet\Desktop\BADES\obj\x86\Release\BADES.pdb
+C:\Users\ahmet\Desktop\BADES\bin\Release\BADES.exe
+C:\Users\ahmet\Desktop\BADES\bin\Release\BADES.pdb
+C:\Users\ahmet\Desktop\BADES\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\ahmet\Desktop\BADES\obj\x86\Release\bades.Hakkinda.resources
+C:\Users\ahmet\Desktop\BADES\obj\x86\Release\bades.FrmBades.resources
+C:\Users\ahmet\Desktop\BADES\obj\x86\Release\bades.Properties.Resources.resources
+C:\Users\ahmet\Desktop\BADES\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\ahmet\Desktop\BADES\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\ahmet\Desktop\BADES SVN\bin\Release\BADES.exe.config
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\BADES.csproj.ResolveComReference.cache
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\BADES.exe
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\BADES.pdb
+C:\Users\ahmet\Desktop\BADES SVN\bin\Release\BADES.exe
+C:\Users\ahmet\Desktop\BADES SVN\bin\Release\BADES.pdb
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\bades.Hakkinda.resources
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\bades.FrmBades.resources
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\bades.Properties.Resources.resources
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\GenerateResource.write.1.tlog
