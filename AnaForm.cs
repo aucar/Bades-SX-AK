@@ -295,10 +295,13 @@ namespace bades
                     if ((bitistarihitxt != "") && (Oku(title["AksiyonDurumu"]).Trim() == "X")) tutarsizlik = "[İLGİ] Bulgu Giderilmeyecek Görünüyor Ancak Tamamlanma Tarihi Verilmiş.";
                     
                     //Tamamlanma Tarihi Başlangıç Tarihinden Önce
-                    if ((bitis < baslangic) && (bitistarihitxt != "") && (baslangictarihitxt != "")) tutarsizlik = "[HATA] Tamamlanma Tarihi Başlangıç Tarihinden Önce.";
+                    if (bitis < baslangic) tutarsizlik = "[HATA] Tamamlanma Tarihi Başlangıç Tarihinden Önce.";
 
-                    //Bulgu tarihinden önce tamamlanmış veya başlanmış bulgu
-                    if (((baslangic < TarihiOku(bkodu.Substring(0, 4))) || ((bitis < TarihiOku(bkodu.Substring(0, 4)))))) tutarsizlik = "[HATA] Başlama/Bitiş Tarihi Bulgu Tarihinden Önce.";
+                    //Bulgu tarihinden önce başlanmış bulgu
+                    if ((baslangic < TarihiOku(bkodu.Substring(0, 4))) && (baslangictarihitxt != "")) tutarsizlik = "[HATA] Aksiyon Başlama Tarihi Bulgu Tarihinden Önce.";
+
+                    //Bulgu tarihinden önce tamamlanmış bulgu
+                    if ((bitis < TarihiOku(bkodu.Substring(0, 4))) && (bitistarihitxt != "")) tutarsizlik = "[HATA] Aksiyon Bitiş Tarihi Bulgu Tarihinden Önce.";
 
                     //Aksiyon Tamamlanma Tarihi Geçmiş Bulgu
                     if ((bitis <= DateTime.Today) && (Oku(title["AksiyonDurumu"]).Trim() == "D" || Oku(title["AksiyonDurumu"]).Trim() == "P")) tutarsizlik = "[HATA] Aksiyon Planlama/Düzeltme Aşamasında Görünüyor Ancak Tamamlanma Tarihi Geçmiş.";
@@ -1358,8 +1361,8 @@ namespace bades
             DokumaniKapat();
 
             //Uyarı penceresi göster
-            MessageBox.Show("Birazdan BADES sisteminden indirdiğiniz XML dosyasını açmanız istenecektir. BADES sisteminden iki farklı XML dosyası indirilebilmektedir. \"Raporlar\" menüsünden indirdiğiniz XML dosyasında " +
-                "bulguya ilişkin detaylar yer alırken \"Aksiyon Planları\" menüsünden indirdiğiniz XML dosyasında bu detaylar yer almamaktadır. " + Environment.NewLine + Environment.NewLine + "Lütfen BADES Sistemi Raporlar menüsünden XML dosyası indirdiğinizden emin olun.", "Raporlar Menüsünden XML Dosyası İndirin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Birazdan BADES sisteminden indirdiğiniz XML dosyasını açmanız istenecektir. BADES sisteminden iki farklı XML dosyası indirilebilmektedir. \"Rapor > Bulgular\" menüsünden indirdiğiniz XML dosyasında " +
+                "bulguya ilişkin detaylar yer alırken \"Aksiyon Planı\" menüsünden indirdiğiniz XML dosyasında bu detaylar yer almamaktadır. " + Environment.NewLine + Environment.NewLine + "Lütfen BADES Sistemi \"Rapor > Bulgular\" menüsünden XML dosyası indirdiğinizden emin olun.", "Raporlar Menüsünden XML Dosyası İndirin", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //Aç Diyaloğu
             DlgAc.Filter = "XML Dosyaları (*.xml)|*.xml|Tüm Dosyalar (*.*)|*.*";
@@ -1369,13 +1372,15 @@ namespace bades
             {
                 XmlDosyasi = DlgAc.FileName;
                 DokumaniYukle();
+
+                //Sorumluluk Uyarı penceresi göster
+                MessageBox.Show("Bades SX AK tarafından sunulan hizmetin kullanımı neticesinde ortaya çıkabilecek sorunlardan ya da problemlerden bu yazılımın mimarı veya mensup olduğu kurum sorumlu değildir ve sorumlu tutulamaz. Kullanıma ait tüm sorunlar ve riskler kullanıcının ya da kullanıcıların kendi şahsi sorumluluğundadır. " +
+                    "Bades SX AK'nın geliştiricisi, bu içeriğin tamlığına, bütünlüğüne, doğruluğuna, güncelliğine, kalitesine, güvenilirliğine ve kullanımı neticesinde ortaya çıkabilecek sorunlara ve bu sorunların giderilmesine ilişkin garanti vermez. ", "Sorumsuzluk Beyanı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+    
             }
 
-            //Sorumluluk Uyarı penceresi göster
-            MessageBox.Show("Bades SX AK tarafından sunulan hizmetin kullanımı neticesinde ortaya çıkabilecek sorun ya da problemlerden bu yazılımın mimarı veya mensup olduğu kurum sorumlu değildir ve sorumlu tutulamaz. Kullanıma ait tüm sorun ve riskler kullanıcı ya da kullanıcıların kendi şahsi sorumluluğundadır. " + 
-                "Bades SX AK'nın geliştiricisi, bu içeriğin tamlığına, bütünlüğüne, doğruluğuna, güncelliğine, kalitesine, güvenilirliğine ve kullanımı neticesinde ortaya çıkabilecek sorunlar ve bu sorunların giderilmesine ilişkin garanti vermez. " , "Sorumsuzluk Beyanı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            
+        
 
         }
 

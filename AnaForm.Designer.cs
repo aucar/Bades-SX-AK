@@ -124,7 +124,7 @@ namespace bades
             this.mMenu.Location = new System.Drawing.Point(0, 0);
             this.mMenu.Name = "mMenu";
             this.mMenu.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-            this.mMenu.Size = new System.Drawing.Size(1002, 25);
+            this.mMenu.Size = new System.Drawing.Size(1002, 24);
             this.mMenu.TabIndex = 2;
             this.mMenu.Text = "menuStrip1";
             // 
@@ -140,7 +140,7 @@ namespace bades
             this.toolStripSeparator3,
             this.mCikis});
             this.bulguDosyasıToolStripMenuItem.Name = "bulguDosyasıToolStripMenuItem";
-            this.bulguDosyasıToolStripMenuItem.Size = new System.Drawing.Size(93, 19);
+            this.bulguDosyasıToolStripMenuItem.Size = new System.Drawing.Size(85, 18);
             this.bulguDosyasıToolStripMenuItem.Text = "Bulgu Dosyası";
             // 
             // mXMLAl
@@ -216,14 +216,14 @@ namespace bades
             this.toolStripSeparator10,
             this.tGruplandırma});
             this.mGruplandirma.Name = "mGruplandirma";
-            this.mGruplandirma.Size = new System.Drawing.Size(92, 19);
+            this.mGruplandirma.Size = new System.Drawing.Size(82, 18);
             this.mGruplandirma.Text = "Gruplandırma";
             // 
             // tKonusunaGore
             // 
             this.tKonusunaGore.CheckOnClick = true;
             this.tKonusunaGore.Name = "tKonusunaGore";
-            this.tKonusunaGore.Size = new System.Drawing.Size(233, 22);
+            this.tKonusunaGore.Size = new System.Drawing.Size(229, 22);
             this.tKonusunaGore.Text = "Konusuna Göre Grupla";
             this.tKonusunaGore.Click += new System.EventHandler(this.tKonusunaGore_Click);
             // 
@@ -231,7 +231,7 @@ namespace bades
             // 
             this.tNiteligineGore.CheckOnClick = true;
             this.tNiteligineGore.Name = "tNiteligineGore";
-            this.tNiteligineGore.Size = new System.Drawing.Size(233, 22);
+            this.tNiteligineGore.Size = new System.Drawing.Size(229, 22);
             this.tNiteligineGore.Text = "Niteliğine Göre Grupla";
             this.tNiteligineGore.Click += new System.EventHandler(this.tNiteligineGore_Click);
             // 
@@ -239,7 +239,7 @@ namespace bades
             // 
             this.tOnemDerecesineGore.CheckOnClick = true;
             this.tOnemDerecesineGore.Name = "tOnemDerecesineGore";
-            this.tOnemDerecesineGore.Size = new System.Drawing.Size(233, 22);
+            this.tOnemDerecesineGore.Size = new System.Drawing.Size(229, 22);
             this.tOnemDerecesineGore.Text = "Önem Derecesine Göre Grupla";
             this.tOnemDerecesineGore.Click += new System.EventHandler(this.tOnemDerecesineGore_Click);
             // 
@@ -247,26 +247,26 @@ namespace bades
             // 
             this.tTariheGore.CheckOnClick = true;
             this.tTariheGore.Name = "tTariheGore";
-            this.tTariheGore.Size = new System.Drawing.Size(233, 22);
+            this.tTariheGore.Size = new System.Drawing.Size(229, 22);
             this.tTariheGore.Text = "Tespit Yılına Göre Grupla";
             this.tTariheGore.Click += new System.EventHandler(this.tTariheGore_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(226, 6);
             // 
             // tTutarsizligaGore
             // 
             this.tTutarsizligaGore.Name = "tTutarsizligaGore";
-            this.tTutarsizligaGore.Size = new System.Drawing.Size(233, 22);
+            this.tTutarsizligaGore.Size = new System.Drawing.Size(229, 22);
             this.tTutarsizligaGore.Text = "Tutarsızlığa Göre Grupla";
             this.tTutarsizligaGore.Click += new System.EventHandler(this.tTutarsizligaGore_Click);
             // 
             // tIlgiliBolumeGore
             // 
             this.tIlgiliBolumeGore.Name = "tIlgiliBolumeGore";
-            this.tIlgiliBolumeGore.Size = new System.Drawing.Size(233, 22);
+            this.tIlgiliBolumeGore.Size = new System.Drawing.Size(229, 22);
             this.tIlgiliBolumeGore.Text = "İlgili Bölüme Göre Grupla";
             this.tIlgiliBolumeGore.Click += new System.EventHandler(this.tIlgiliBolumeGore_Click);
             // 
@@ -274,20 +274,20 @@ namespace bades
             // 
             this.tGiderilmeDurumunaGore.CheckOnClick = true;
             this.tGiderilmeDurumunaGore.Name = "tGiderilmeDurumunaGore";
-            this.tGiderilmeDurumunaGore.Size = new System.Drawing.Size(233, 22);
+            this.tGiderilmeDurumunaGore.Size = new System.Drawing.Size(229, 22);
             this.tGiderilmeDurumunaGore.Text = "Alınan Aksiyona Göre Grupla";
             this.tGiderilmeDurumunaGore.Click += new System.EventHandler(this.tGiderilmeDurumunaGore_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(226, 6);
             // 
             // tGruplandırma
             // 
             this.tGruplandırma.CheckOnClick = true;
             this.tGruplandırma.Name = "tGruplandırma";
-            this.tGruplandırma.Size = new System.Drawing.Size(233, 22);
+            this.tGruplandırma.Size = new System.Drawing.Size(229, 22);
             this.tGruplandırma.Text = "Gruplandırmaları Kaldır";
             this.tGruplandırma.Click += new System.EventHandler(this.tGruplandırma_Click);
             // 
@@ -302,27 +302,27 @@ namespace bades
             this.toolStripSeparator4,
             this.mHakkinda});
             this.yardımToolStripMenuItem.Name = "yardımToolStripMenuItem";
-            this.yardımToolStripMenuItem.Size = new System.Drawing.Size(57, 19);
+            this.yardımToolStripMenuItem.Size = new System.Drawing.Size(51, 18);
             this.yardımToolStripMenuItem.Text = "Yardım";
             // 
             // mYardim
             // 
             this.mYardim.Image = ((System.Drawing.Image)(resources.GetObject("mYardim.Image")));
             this.mYardim.Name = "mYardim";
-            this.mYardim.Size = new System.Drawing.Size(168, 22);
+            this.mYardim.Size = new System.Drawing.Size(170, 22);
             this.mYardim.Text = "Yardım Konuları...";
             this.mYardim.Click += new System.EventHandler(this.mYardim_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(167, 6);
             // 
             // mDestek
             // 
             this.mDestek.Image = ((System.Drawing.Image)(resources.GetObject("mDestek.Image")));
             this.mDestek.Name = "mDestek";
-            this.mDestek.Size = new System.Drawing.Size(168, 22);
+            this.mDestek.Size = new System.Drawing.Size(170, 22);
             this.mDestek.Text = "Destek...";
             this.mDestek.Click += new System.EventHandler(this.mDestek_Click);
             // 
@@ -330,7 +330,7 @@ namespace bades
             // 
             this.mHataBildir.Image = ((System.Drawing.Image)(resources.GetObject("mHataBildir.Image")));
             this.mHataBildir.Name = "mHataBildir";
-            this.mHataBildir.Size = new System.Drawing.Size(168, 22);
+            this.mHataBildir.Size = new System.Drawing.Size(170, 22);
             this.mHataBildir.Text = "Hata Bildir...";
             this.mHataBildir.Click += new System.EventHandler(this.mHataBildir_Click);
             // 
@@ -338,19 +338,19 @@ namespace bades
             // 
             this.mOzellikEkle.Image = ((System.Drawing.Image)(resources.GetObject("mOzellikEkle.Image")));
             this.mOzellikEkle.Name = "mOzellikEkle";
-            this.mOzellikEkle.Size = new System.Drawing.Size(168, 22);
+            this.mOzellikEkle.Size = new System.Drawing.Size(170, 22);
             this.mOzellikEkle.Text = "Yeni Özellik...";
             this.mOzellikEkle.Click += new System.EventHandler(this.mOzellikEkle_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(165, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(167, 6);
             // 
             // mHakkinda
             // 
             this.mHakkinda.Name = "mHakkinda";
-            this.mHakkinda.Size = new System.Drawing.Size(168, 22);
+            this.mHakkinda.Size = new System.Drawing.Size(170, 22);
             this.mHakkinda.Text = "Hakkında...";
             this.mHakkinda.Click += new System.EventHandler(this.mHakkinda_Click);
             // 
@@ -374,7 +374,7 @@ namespace bades
             this.tHataBildir,
             this.tOzellikEkle});
             this.tBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.tBar.Location = new System.Drawing.Point(0, 25);
+            this.tBar.Location = new System.Drawing.Point(0, 24);
             this.tBar.Name = "tBar";
             this.tBar.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tBar.Size = new System.Drawing.Size(1002, 29);
@@ -590,7 +590,7 @@ namespace bades
             this.AnaSayfa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AnaSayfa.Name = "AnaSayfa";
             this.AnaSayfa.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.AnaSayfa.Size = new System.Drawing.Size(994, 589);
+            this.AnaSayfa.Size = new System.Drawing.Size(994, 590);
             this.AnaSayfa.TabIndex = 2;
             this.AnaSayfa.Text = "Genel Görünüm";
             this.AnaSayfa.UseVisualStyleBackColor = true;
@@ -604,7 +604,7 @@ namespace bades
             this.BulguLst.MultiSelect = false;
             this.BulguLst.Name = "BulguLst";
             this.BulguLst.ShowItemToolTips = true;
-            this.BulguLst.Size = new System.Drawing.Size(988, 581);
+            this.BulguLst.Size = new System.Drawing.Size(988, 582);
             this.BulguLst.TabIndex = 19;
             this.BulguLst.UseCompatibleStateImageBehavior = false;
             this.BulguLst.View = System.Windows.Forms.View.Details;
@@ -616,11 +616,11 @@ namespace bades
             this.Tab.Controls.Add(this.AnaSayfa);
             this.Tab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Tab.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Tab.Location = new System.Drawing.Point(0, 54);
+            this.Tab.Location = new System.Drawing.Point(0, 53);
             this.Tab.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
-            this.Tab.Size = new System.Drawing.Size(1002, 615);
+            this.Tab.Size = new System.Drawing.Size(1002, 616);
             this.Tab.TabIndex = 6;
             // 
             // FrmBades
@@ -638,7 +638,7 @@ namespace bades
             this.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.Name = "FrmBades";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "BADES Adaptörü";
+            this.Text = "Bades SX AK";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmBades_Load);
             this.mMenu.ResumeLayout(false);

@@ -34,3 +34,19 @@ C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\bades.FrmBades.resources
 C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\bades.Properties.Resources.resources
 C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\GenerateResource.read.1.tlog
 C:\Users\ahmet\Desktop\BADES SVN\obj\x86\Release\GenerateResource.write.1.tlog
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\ResolveAssemblyReference.cache
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\BADES.csproj.ResolveComReference.cache
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\bades.Hakkinda.resources
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\bades.FrmBades.resources
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\bades.Properties.Resources.resources
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\GenerateResource.read.1.tlog
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\GenerateResource.write.1.tlog
+V:\PROJECTS\BADES SVN\trunk\bin\Release\Bades SX AK.exe.config
+V:\PROJECTS\BADES SVN\trunk\bin\Release\Bades SX AK.exe.manifest
+V:\PROJECTS\BADES SVN\trunk\bin\Release\Bades SX AK.application
+V:\PROJECTS\BADES SVN\trunk\bin\Release\Bades SX AK.exe
+V:\PROJECTS\BADES SVN\trunk\bin\Release\Bades SX AK.pdb
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\Bades SX AK.exe.manifest
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\Bades SX AK.application
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\Bades SX AK.exe
+V:\PROJECTS\BADES SVN\trunk\obj\x86\Release\Bades SX AK.pdb
