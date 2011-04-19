@@ -4,7 +4,7 @@
   <description asmv2:iconFile="icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Bades SX AK" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="Bades SX AK" version="1.2.0.0" language="neutral" processorArchitecture="x86" />
     <commandLine file="Bades SX AK.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Bades SX AK.exe" size="125440">
-      <assemblyIdentity name="Bades SX AK" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Bades SX AK.exe" size="143360">
+      <assemblyIdentity name="Bades SX AK" version="1.2.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>bNlG3qJHLdDub7aTjvoU8MRzsLc=</dsig:DigestValue>
+        <dsig:DigestValue>RpFjFxqaAzJX9XMC1GGD9zykByo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

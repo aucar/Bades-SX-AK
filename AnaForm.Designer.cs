@@ -58,6 +58,7 @@ namespace bades
             this.mKapat = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mExceleAktar = new System.Windows.Forms.ToolStripMenuItem();
+            this.mYonetimBeyani = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mCikis = new System.Windows.Forms.ToolStripMenuItem();
             this.mGruplandirma = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,6 +109,7 @@ namespace bades
             this.AnaSayfa = new System.Windows.Forms.TabPage();
             this.BulguLst = new System.Windows.Forms.ListView();
             this.Tab = new System.Windows.Forms.TabControl();
+            this.SIcons = new System.Windows.Forms.ImageList(this.components);
             this.mMenu.SuspendLayout();
             this.tBar.SuspendLayout();
             this.sBar.SuspendLayout();
@@ -127,6 +129,7 @@ namespace bades
             this.mMenu.Size = new System.Drawing.Size(1002, 24);
             this.mMenu.TabIndex = 2;
             this.mMenu.Text = "menuStrip1";
+            this.mMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mMenu_ItemClicked);
             // 
             // bulguDosyasıToolStripMenuItem
             // 
@@ -137,6 +140,7 @@ namespace bades
             this.mKapat,
             this.toolStripSeparator1,
             this.mExceleAktar,
+            this.mYonetimBeyani,
             this.toolStripSeparator3,
             this.mCikis});
             this.bulguDosyasıToolStripMenuItem.Name = "bulguDosyasıToolStripMenuItem";
@@ -187,6 +191,15 @@ namespace bades
             this.mExceleAktar.Size = new System.Drawing.Size(246, 22);
             this.mExceleAktar.Text = "Dosyayı Excel\'e Aktar...";
             this.mExceleAktar.Click += new System.EventHandler(this.mExceleAktar_Click);
+            // 
+            // mYonetimBeyani
+            // 
+            this.mYonetimBeyani.Image = global::bades.Properties.Resources.std_word_icon;
+            this.mYonetimBeyani.ImageTransparentColor = System.Drawing.Color.White;
+            this.mYonetimBeyani.Name = "mYonetimBeyani";
+            this.mYonetimBeyani.Size = new System.Drawing.Size(246, 22);
+            this.mYonetimBeyani.Text = "Yönetim Beyanı Oluştur...";
+            this.mYonetimBeyani.Click += new System.EventHandler(this.mYonetimBeyani_Click);
             // 
             // toolStripSeparator3
             // 
@@ -582,15 +595,17 @@ namespace bades
             this.Icons.Images.SetKeyName(2, "planlama.ico");
             this.Icons.Images.SetKeyName(3, "cancel.ico");
             this.Icons.Images.SetKeyName(4, "question.ico");
+            this.Icons.Images.SetKeyName(5, "std_word_icon.gif");
+            this.Icons.Images.SetKeyName(6, "close.png");
             // 
             // AnaSayfa
             // 
             this.AnaSayfa.Controls.Add(this.BulguLst);
-            this.AnaSayfa.Location = new System.Drawing.Point(4, 22);
+            this.AnaSayfa.Location = new System.Drawing.Point(4, 25);
             this.AnaSayfa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AnaSayfa.Name = "AnaSayfa";
             this.AnaSayfa.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.AnaSayfa.Size = new System.Drawing.Size(994, 590);
+            this.AnaSayfa.Size = new System.Drawing.Size(994, 587);
             this.AnaSayfa.TabIndex = 2;
             this.AnaSayfa.Text = "Genel Görünüm";
             this.AnaSayfa.UseVisualStyleBackColor = true;
@@ -604,27 +619,36 @@ namespace bades
             this.BulguLst.MultiSelect = false;
             this.BulguLst.Name = "BulguLst";
             this.BulguLst.ShowItemToolTips = true;
-            this.BulguLst.Size = new System.Drawing.Size(988, 582);
+            this.BulguLst.Size = new System.Drawing.Size(988, 579);
             this.BulguLst.TabIndex = 19;
             this.BulguLst.UseCompatibleStateImageBehavior = false;
             this.BulguLst.View = System.Windows.Forms.View.Details;
             this.BulguLst.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.BulguLst_ColumnClick);
             this.BulguLst.ItemActivate += new System.EventHandler(this.BulguLst_ItemActivate);
+            this.BulguLst.SelectedIndexChanged += new System.EventHandler(this.BulguLst_SelectedIndexChanged);
             // 
             // Tab
             // 
             this.Tab.Controls.Add(this.AnaSayfa);
             this.Tab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Tab.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.Tab.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.Tab.Location = new System.Drawing.Point(0, 53);
             this.Tab.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
             this.Tab.Size = new System.Drawing.Size(1002, 616);
             this.Tab.TabIndex = 6;
+            this.Tab.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Tab_MouseClick);
+            // 
+            // SIcons
+            // 
+            this.SIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("SIcons.ImageStream")));
+            this.SIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.SIcons.Images.SetKeyName(0, "icon_close_16px.gif");
             // 
             // FrmBades
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1002, 691);
@@ -641,6 +665,8 @@ namespace bades
             this.Text = "Bades SX AK";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmBades_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FrmBades_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.FrmBades_DragEnter);
             this.mMenu.ResumeLayout(false);
             this.mMenu.PerformLayout();
             this.tBar.ResumeLayout(false);
@@ -714,6 +740,8 @@ namespace bades
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem tTutarsizligaGore;
         private System.Windows.Forms.ToolStripMenuItem tIlgiliBolumeGore;
+        private System.Windows.Forms.ToolStripMenuItem mYonetimBeyani;
+        private System.Windows.Forms.ImageList SIcons;
     }
 }
 

@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * BADES SX AK 1.0 
+ * BADES SX AK 2.0 
  * BADES Sistemi için XML Ayıklama ve Kodlama Aracı 
  * 
  * Bu program BDDK tarafından geliştirilen BADES sisteminden XML alarak bu 
@@ -128,5 +128,7 @@ namespace bades
         {
             System.Diagnostics.Process.Start("mailto:au@ahmetucar.com?subject=" + AssemblyTitle + "&body=" + AssemblyProduct + " - "+AssemblyVersion + "%0A%0a");
         }
+
+
     }
 }

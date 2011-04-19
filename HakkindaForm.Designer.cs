@@ -47,6 +47,7 @@ namespace bades
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Hakkinda));
             this.labelProductName = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();
@@ -54,6 +55,7 @@ namespace bades
             this.labelDescription = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.p = new System.Windows.Forms.PictureBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.p)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,7 +110,7 @@ namespace bades
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(253, 104);
+            this.button1.Location = new System.Drawing.Point(414, 199);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(77, 25);
             this.button1.TabIndex = 5;
@@ -127,10 +129,24 @@ namespace bades
             this.p.TabIndex = 6;
             this.p.TabStop = false;
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox1.ForeColor = System.Drawing.Color.DarkRed;
+            this.textBox1.Location = new System.Drawing.Point(86, 117);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(405, 76);
+            this.textBox1.TabIndex = 7;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            // 
             // Hakkinda
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(340, 132);
+            this.ClientSize = new System.Drawing.Size(504, 237);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.p);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.labelDescription);
@@ -163,6 +179,7 @@ namespace bades
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox p;
+        private System.Windows.Forms.TextBox textBox1;
 
     }
 }

@@ -129,5 +129,12 @@ namespace bades.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap std_word_icon {
+            get {
+                object obj = ResourceManager.GetObject("std_word_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

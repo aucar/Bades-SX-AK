@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * BADES SX AK 1.0 
+ * BADES SX AK 2.0 
  * BADES Sistemi için XML Ayıklama ve Kodlama Aracı 
  * 
  * Bu program BDDK tarafından geliştirilen BADES sisteminden XML alarak bu 
@@ -25,6 +25,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 using Excel = Microsoft.Office.Interop.Excel;
+using Word = Microsoft.Office.Interop.Word;
+using System.Reflection;
+using System.Globalization;
+
+
 
 namespace bades
 {
@@ -33,10 +38,16 @@ namespace bades
 
         private ListViewColumnSorter lvwColumnSorter;
 
+        private Point _imageLocation = new Point(20, 5);
+        private Point _imgHitArea = new Point(13, 2);
+
         //XMl nesneleri
         string XmlDosyasi;
         XmlElement root;
         XmlDocument doc = new XmlDocument();
+        DateTime DummyDate = new DateTime(1800,1,1);
+        string ComboText = "Bulgu Konusuna Göre";
+        int BulguListIndex = 0;
 
         string[] BulguKodlari = { 
 			
@@ -91,7 +102,7 @@ namespace bades
 			
 		};
 
-        string[] AksiyonDurumlari = { "Planlama", "Düzeltme", "Giderildi", "Yapılmayacak" };
+        string[] AksiyonDurumlari = { "", "Planlama", "Düzeltme", "Giderildi", "Yapılmayacak" };
 
 
 
@@ -169,8 +180,13 @@ namespace bades
         */
         private void DokumaniYukle()
         {
+
+            string logtext = "";
+            string HataMetni = "";
+
             try
             {
+
                 // XML dosyasını yükle
                 doc.Load(XmlDosyasi);
 
@@ -178,6 +194,8 @@ namespace bades
                 XmlNodeList nodeList;
                 root = doc.DocumentElement;
                 nodeList = root.SelectNodes("/Bulgular/Bulgu");
+
+                logtext += "XML dosyasında " + nodeList.Count.ToString() + " adet bulgu bulundu.\n\r";
 
                 // Displayi oluştur ve aç
                 BulguLst.Visible = true;
@@ -187,102 +205,207 @@ namespace bades
                 BulguLst.SmallImageList = Icons;
 
                 // Grupları ekle
+                int BulguSayaci = 0;
+                string bkodulog = "", AksiyonDurumulog = "", Durumlog = "", IlgiliBolumlog = "", AksiyonKodulog = "", baslangictarihilog = "", bitistarihilog = "", TedbirAciklamalog = "";
+
                 foreach (XmlNode title in nodeList)
                 {
+                    BulguSayaci++;                    
 
-                    string bkodu = Oku(title["BulguKodu"]);
+                    string bkodu = "";
+                    //int bkodusayaci = 0;
+                    try
+                    {
+                        bkodu = Oku(title["BulguKodu"]);
+                   }
+                    catch (Exception eerr)
+                    {
+                        bkodulog += BulguSayaci.ToString() + " nolu bulgudaki BulguKodu okunamadı :" + eerr.ToString() + "\n\r";
+                    }
+                    
 
                     int bonem = -1;
                     Color brenk = Color.Black;
 
                     //Bulgunun aksiyon durumunu bul ve eklenecek ikonu seç
-                    switch (Oku(title["AksiyonDurumu"]))
+                    string AksiyonD = "";
+                    try
                     {
-                        case "T":
-                            bonem = 0;
-                            break;
+                        AksiyonD = Oku(title["AksiyonDurumu"]);
+                    }
+                    catch (Exception eerr)
+                    {
+                        AksiyonDurumulog += BulguSayaci.ToString() + " nolu bulgudaki AksiyonDurumu okunamadı :" + eerr.ToString() + "\n\r";
+                    }
 
-                        case "D":
-                            bonem = 1;
-                            break;
+                    ListViewItem item = new ListViewItem();
+                    try
+                    {
+                        switch (AksiyonD)
+                        {
+                            case "T":
+                                bonem = 0;
+                                break;
 
-                        case "P":
-                            bonem = 2;
-                            break;
+                            case "D":
+                                bonem = 1;
+                                break;
 
-                        case "X":
-                            bonem = 3;
-                            break;
+                            case "P":
+                                bonem = 2;
+                                break;
 
-                        default:
-                            bonem = 4;
-                            break;
+                            case "X":
+                                bonem = 3;
+                                break;
+
+                            default:
+                                bonem = 4;
+                                break;
+                        }
+
+                        item = new ListViewItem(bkodu, bonem);
+                        item.SubItems.Add(BulguAlaniniGetir(bkodu.Substring(7, 4)));
+                    }
+                    catch 
+                    {
+                        MessageBox.Show("Bulgu kodu ve önem derecesi işlenirken hata oluştu. BulguKodu = " + bkodu);
                     }
 
 
-                    ListViewItem item = new ListViewItem(bkodu, bonem);
-
-                    //Bulgu konusunu yaz ("PO.01 - Stratejik bilgi teknolojileri planının tanımlanması" vs.)
-                    item.SubItems.Add(BulguAlaniniGetir(bkodu.Substring(7, 4)));
-
                     //Bulguyu yaz
-                    string durum = Oku(title["Durum"]);
-                    item.SubItems.Add(kisalt(durum));
-                    item.ToolTipText = durum;
+                    string durum = "";
+                    try
+                    {
+                        durum = Oku(title["Durum"]);
+                        item.SubItems.Add(kisalt(durum));
+                        item.ToolTipText = durum.Trim();
+                    }
+                    catch (Exception eerr)
+                    {
+                        Durumlog += BulguSayaci.ToString() + " nolu bulgudaki Durum okunamadı :" + eerr.ToString() + "\n\r";
+                    }
+
+                    
+
 
                     //İlgili Bölümü Yaz
-                    item.SubItems.Add(Oku(title["IlgiliBolum"]));
+                    string IlgiliBolum = "";
+                    try
+                    {
+                        IlgiliBolum = Oku(title["IlgiliBolum"]);
+                        item.SubItems.Add(IlgiliBolum);
+                    }
+                    catch (Exception eerr)
+                    {
+                        IlgiliBolumlog += BulguSayaci.ToString() + " nolu bulgudaki IlgiliBolum okunamadı :" + eerr.ToString() + "\n\r";
+                    }
+
+
 
                     //Aksiyon Durumunu yaz
                     string AksiyonDurumu;
-                    string AksiyonKodu = Oku(title["AksiyonDurumu"]);
-
-                    switch (AksiyonKodu)
+                    string AksiyonKodu = "";
+                    try
                     {
-                        case "P":
-                            AksiyonDurumu = "Planlama";
-                            break;
+                        AksiyonKodu = Oku(title["AksiyonDurumu"]);
+                        switch (AksiyonKodu)
+                        {
+                            case "P":
+                                AksiyonDurumu = "Planlama";
+                                break;
 
-                        case "D":
-                            AksiyonDurumu = "Düzeltme";
-                            break;
+                            case "D":
+                                AksiyonDurumu = "Düzeltme";
+                                break;
 
-                        case "T":
-                            AksiyonDurumu = "Giderildi";
-                            break;
+                            case "T":
+                                AksiyonDurumu = "Giderildi";
+                                break;
 
-                        case "X":
-                            AksiyonDurumu = "Yapılmayacak";
-                            break;
+                            case "X":
+                                AksiyonDurumu = "Yapılmayacak";
+                                break;
 
-                        default:
-                            AksiyonDurumu = AksiyonKodu;
-                            brenk = Color.Black;
-                            break;
+                            default:
+                                AksiyonDurumu = AksiyonKodu;
+                                brenk = Color.Black;
+                                break;
+                        }
+
+                        item.SubItems.Add(AksiyonDurumu);
+                    }
+                    catch (Exception eerr)
+                    {
+                        AksiyonKodulog += BulguSayaci.ToString() + " nolu bulgudaki AksiyonDurumu okunamadı :" + eerr.ToString() + "\n\r";
                     }
 
-                    item.SubItems.Add(AksiyonDurumu);
+
+
+
+                    DateTime bitis = new DateTime(), baslangic = new DateTime();
+                    string baslangictarihitxt = "", bitistarihitxt = "";
+
+                    //Başlangıç tarihini al
+                    try
+                    {
+                        baslangictarihitxt = Oku(title["AksiyonBasTarih"]);
+                        baslangic = TarihiOku(baslangictarihitxt);
+
+                        if (baslangic != DummyDate)
+                        {
+                            baslangictarihitxt = baslangic.ToString("d", CultureInfo.CreateSpecificCulture("de-DE"));
+                        }
+                        else
+                        {
+                            baslangictarihitxt = "";
+                        }
+
+                    }
+                    catch (Exception eerr)
+                    {
+                        baslangictarihilog += BulguSayaci.ToString() + " nolu bulgudaki AksiyonBasTarih okunamadı :" + eerr.ToString() + "\n\r";
+                    }
 
 
                     //Aksiyon Tamamlanma Tarihini yaz
-                    item.SubItems.Add(Oku(title["AksiyonTamTarih"]));
+                    try
+                    {
+                        bitistarihitxt = Oku(title["AksiyonTamTarih"]);
+                        bitis = TarihiOku(bitistarihitxt);
+                        
+                        if (bitis != DummyDate)
+                        {
+                            bitistarihitxt = bitis.ToString("d", CultureInfo.CreateSpecificCulture("de-DE"));
+                        }
+                        else
+                        {
+                            bitistarihitxt = "";
+                        }
+                        
+                        item.SubItems.Add(bitistarihitxt);
+                    }
+                    catch (Exception eerr)
+                    {
+                        bitistarihilog += BulguSayaci.ToString() + " nolu bulgudaki AksiyonTamTarih okunamadı :" + eerr.ToString() + "\n\r";
+                    }
+
+
 
                     //Tedbir Açıklamayı yaz
-                    item.SubItems.Add(Oku(title["TedbirAciklama"]));
+                    string TedbirAciklama = "";
+                    try
+                    {
+                        TedbirAciklama = Oku(title["TedbirAciklama"]);
+                        item.SubItems.Add(TedbirAciklama);
+                    }
+                    catch (Exception eerr)
+                    {
+                        TedbirAciklamalog += BulguSayaci.ToString() + " nolu bulgudaki TedbirAciklama okunamadı :" + eerr.ToString() + "\n\r";
+                    }
 
                     //Tutarsızlığı yaz
                     string tutarsizlik = "Tutarsızlık Yok";
-                    DateTime bitis, baslangic;
-                    string baslangictarihitxt, bitistarihitxt;
-
-                    //Tamamlanma tarihini al
-                    bitistarihitxt = Oku(title["AksiyonTamTarih"]).Trim();
-                    bitis = TarihiOku(bitistarihitxt);
-
-                    //Başlangıç tarihini al
-                    baslangictarihitxt = Oku(title["AksiyonBasTarih"]).Trim();
-                    baslangic = TarihiOku(baslangictarihitxt);
-
 
                     //Aksiyon planı çok kısa
                     if (Oku(title["TedbirAciklama"]).Trim().Length < 40) tutarsizlik = "[İLGİ] Aksiyon Detayları Çok Kısa.";
@@ -292,16 +415,16 @@ namespace bades
                     if ((zamanaraligi.Days >= 500 ) && ((Oku(title["AksiyonDurumu"]).Trim() == "D") || (Oku(title["AksiyonDurumu"]).Trim() == "P"))) tutarsizlik = "[İLGİ] Tamamlanma tarihi çok uzun.";
                     
                     //Giderilmeyecek Dendiği Halde Tamamlanma Tarihi Olan Bulgu
-                    if ((bitistarihitxt != "") && (Oku(title["AksiyonDurumu"]).Trim() == "X")) tutarsizlik = "[İLGİ] Bulgu Giderilmeyecek Görünüyor Ancak Tamamlanma Tarihi Verilmiş.";
+                    if ((bitis != DummyDate) && (Oku(title["AksiyonDurumu"]).Trim() == "X")) tutarsizlik = "[İLGİ] Bulgu Giderilmeyecek Görünüyor Ancak Tamamlanma Tarihi Verilmiş.";
                     
                     //Tamamlanma Tarihi Başlangıç Tarihinden Önce
                     if (bitis < baslangic) tutarsizlik = "[HATA] Tamamlanma Tarihi Başlangıç Tarihinden Önce.";
 
                     //Bulgu tarihinden önce başlanmış bulgu
-                    if ((baslangic < TarihiOku(bkodu.Substring(0, 4))) && (baslangictarihitxt != "")) tutarsizlik = "[HATA] Aksiyon Başlama Tarihi Bulgu Tarihinden Önce.";
+                    if ((baslangic < TarihiOku(bkodu.Substring(0, 4))) && (baslangic != DummyDate)) tutarsizlik = "[HATA] Aksiyon Başlama Tarihi Bulgu Tarihinden Önce.";
 
                     //Bulgu tarihinden önce tamamlanmış bulgu
-                    if ((bitis < TarihiOku(bkodu.Substring(0, 4))) && (bitistarihitxt != "")) tutarsizlik = "[HATA] Aksiyon Bitiş Tarihi Bulgu Tarihinden Önce.";
+                    if ((bitis < TarihiOku(bkodu.Substring(0, 4))) && (bitis != DummyDate)) tutarsizlik = "[HATA] Aksiyon Bitiş Tarihi Bulgu Tarihinden Önce.";
 
                     //Aksiyon Tamamlanma Tarihi Geçmiş Bulgu
                     if ((bitis <= DateTime.Today) && (Oku(title["AksiyonDurumu"]).Trim() == "D" || Oku(title["AksiyonDurumu"]).Trim() == "P")) tutarsizlik = "[HATA] Aksiyon Planlama/Düzeltme Aşamasında Görünüyor Ancak Tamamlanma Tarihi Geçmiş.";
@@ -313,13 +436,13 @@ namespace bades
                     if (Oku(title["AksiyonDurumu"]).Trim() == "") tutarsizlik = "[HATA] Aksiyon Durumu Belirtilmemiş.";
 
                     //Aksiyon Tamamlanma Tarihi Belirtilmemiş Bulgu
-                    if ((bitistarihitxt == "") && (Oku(title["AksiyonDurumu"]).Trim() != "X")) tutarsizlik = "[HATA] Aksiyon Tamamlanma Tarihi Belirtilmemiş.";
+                    if ((bitis == DummyDate) && (Oku(title["AksiyonDurumu"]).Trim() != "X")) tutarsizlik = "[HATA] Aksiyon Tamamlanma Tarihi Belirtilmemiş.";
 
                     //Tedbir Açıklama Belirtilmemiş Bulgu
                     if (Oku(title["TedbirAciklama"]).Trim() == "") tutarsizlik = "[HATA] Alınan Aksiyon Belirtilmemiş.";
 
                     //Aksiyon Belirtilmemiş Bulgu
-                    if ((bitistarihitxt == "") && (Oku(title["AksiyonDurumu"]).Trim() == "") && (Oku(title["TedbirAciklama"]).Trim() == "")) tutarsizlik = "[HATA] Aksiyon Planı Yok.";
+                    if ((bitis == DummyDate) && (Oku(title["AksiyonDurumu"]).Trim() == "") && (Oku(title["TedbirAciklama"]).Trim() == "")) tutarsizlik = "[HATA] Aksiyon Planı Yok.";
 
 
                     //Satırı tutarsızlık koduna göre renklendir
@@ -339,7 +462,6 @@ namespace bades
 
                     //Satır rengini belirle
                     item.ForeColor = brenk;
-
                     BulguLst.Items.Add(item);
 
                 }
@@ -362,7 +484,13 @@ namespace bades
 
                 //Comboyu aç ve grupla - Denetim Konuları
                 tCmbGrupla.Enabled = true;
-                KonusunaGoreGrupla();
+                CmbGrupla_Degistir(ComboText);
+                //(tCmbGrupla as IPostBackDataHandler).RaisePostDataChangedEvent(null, null);
+                BulguLst.Items[BulguListIndex].Selected = true;
+                BulguLst.EnsureVisible(BulguListIndex);
+
+                //KonusunaGoreGrupla();
+
 
                 BulguLst.Refresh();
 
@@ -394,6 +522,7 @@ namespace bades
                 tXMLVer.Enabled = true;
                 mExceleAktar.Enabled = true;
                 tExcelAktar.Enabled = true;
+                mYonetimBeyani.Enabled = true;
 
                 //Gruplandırma menüsünü aktif et
                 foreach (ToolStripItem item in mGruplandirma.DropDownItems)
@@ -405,10 +534,16 @@ namespace bades
                     }
                 }
 
+                HataMetni = bkodulog + AksiyonDurumulog + Durumlog + IlgiliBolumlog + AksiyonKodulog + baslangictarihilog + bitistarihilog + TedbirAciklamalog;
+
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("XML Dosyası yüklenirken bir hata oluştu : \n\r" 
+                                + logtext + "\n\r" 
+                                + HataMetni + "\n\r" 
+                                + ex.ToString());
             }
         }
 
@@ -443,6 +578,8 @@ namespace bades
             tXMLVer.Enabled = false;
             mExceleAktar.Enabled = false;
             tExcelAktar.Enabled = false;
+            mYonetimBeyani.Enabled = false;
+
 
             //Gruplandırma menüsünü kapat
             foreach (ToolStripItem item in mGruplandirma.DropDownItems)
@@ -512,7 +649,18 @@ namespace bades
         */
         private string BulguAlaniniGetir(string kod)
         {
-            return BulguKonulari[Array.IndexOf(BulguKodlari, kod)].Trim();
+          
+            string sonuc = "";
+            try
+            {
+                sonuc = BulguKonulari[Array.IndexOf(BulguKodlari, kod)].Trim();
+            }
+            catch
+            {
+                sonuc = "Bilinmeyen Kod : " + kod;
+            }
+
+            return sonuc;
         }
 
 
@@ -742,7 +890,7 @@ namespace bades
         private string Oku(XmlNode title)
         {
             string val = "";
-            if (title != null) val = title.InnerText;
+            if (title != null) val = title.InnerText.Trim();
             return val;
 
         }
@@ -766,14 +914,14 @@ namespace bades
                     }
                     catch (Exception)
                     {
-                        //Metinde sorun varsa 01.01.1900 tarihini dönder
-                        val = new DateTime(1900, 1, 1);
+                        //Metinde sorun varsa 01.01.1800 tarihini dönder
+                        val = DummyDate;
                     }
                 }
                 else
                 {
-                    //Metinde sorun varsa 01.01.1900 tarihini dönder
-                    val = new DateTime(1900, 1, 1);
+                    //Metinde sorun varsa 01.01.1800 tarihini dönder
+                    val = DummyDate;
                 }
             }
             return val;
@@ -1069,11 +1217,21 @@ namespace bades
             foreach (string konu in BulguKodlari)
                 BulguLst.Groups.Add(new ListViewGroup(BulguAlaniniGetir(konu), HorizontalAlignment.Left));
 
+            //Hatalı grupları ekle
+            BulguLst.Groups.Add(new ListViewGroup("Bilinmeyen Kod", HorizontalAlignment.Left));
+
             //Öğeleri ekle
             foreach (ListViewItem item in BulguLst.Items)
             {
                 //Grup seç
-                item.Group = BulguLst.Groups[Array.IndexOf(BulguKodlari, item.Text.Substring(7, 4))];
+                try
+                {
+                    item.Group = BulguLst.Groups[Array.IndexOf(BulguKodlari, item.Text.Substring(7, 4))];
+                }
+                catch
+                {
+                    item.Group = BulguLst.Groups[BulguLst.Groups.Count-1];
+                }
             }
         }
 
@@ -1188,6 +1346,12 @@ namespace bades
             lvwColumnSorter = new ListViewColumnSorter();
             this.BulguLst.ListViewItemSorter = lvwColumnSorter;
 
+            //Set the Mode of Drawing as Owner Drawn
+            this.Tab.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+
+            //Add the Handler to draw the Image on Tab Pages
+            Tab.DrawItem += Tab_DrawItem; 
+
         }        
         
         /*
@@ -1202,7 +1366,7 @@ namespace bades
             BulguLst.AllowColumnReorder = true;
             BulguLst.FullRowSelect = true;
             BulguLst.Sorting = System.Windows.Forms.SortOrder.Ascending;
-
+            
             //Ekranı temizle
             DokumaniKapat();
         }
@@ -1211,12 +1375,13 @@ namespace bades
         * Bu prosedür gruplandırma combosundaki değişikliklere göre gruplama prosedürlerini çağırır.
         */
 
-        private void CmbGrupla_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void CmbGrupla_Degistir(string metin)
         {
             BulguLst.BeginUpdate();
             BulguLst.Groups.Clear();
 
-            switch (tCmbGrupla.Text)
+            switch (metin)
             {
                 case "Bulgu Tespit Yılına Göre":
                     YilaGoreGrupla();
@@ -1255,6 +1420,14 @@ namespace bades
 
             BulguLst.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             BulguLst.EndUpdate();
+        }
+
+        private void CmbGrupla_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            ComboText = this.tCmbGrupla.Text;
+            CmbGrupla_Degistir(this.tCmbGrupla.Text);
+
         }
 
 
@@ -1361,8 +1534,8 @@ namespace bades
             DokumaniKapat();
 
             //Uyarı penceresi göster
-            MessageBox.Show("Birazdan BADES sisteminden indirdiğiniz XML dosyasını açmanız istenecektir. BADES sisteminden iki farklı XML dosyası indirilebilmektedir. \"Rapor > Bulgular\" menüsünden indirdiğiniz XML dosyasında " +
-                "bulguya ilişkin detaylar yer alırken \"Aksiyon Planı\" menüsünden indirdiğiniz XML dosyasında bu detaylar yer almamaktadır. " + Environment.NewLine + Environment.NewLine + "Lütfen BADES Sistemi \"Rapor > Bulgular\" menüsünden XML dosyası indirdiğinizden emin olun.", "Raporlar Menüsünden XML Dosyası İndirin", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Birazdan BADES sisteminden indirdiğiniz XML dosyasını açmanız istenecektir. BADES sisteminden iki farklı XML dosyası indirilebilmektedir. \"Raporlar & Bulgular > Bulgular\" menüsünden indirdiğiniz XML dosyasında " +
+                "bulguya ilişkin detaylar yer alırken \"Aksiyon Planı\" menüsünden indirdiğiniz XML dosyasında bu detaylar yer almamaktadır. Bu sayfada \"XML Oluştur\" butonunu kullanarak ilgili XML kaynağını görüntüleyin. Sonra \"Sayfa > Farklı Kaydet...\" menüsü aracılığıyla sayfayı XML uzantılı olarak kaydedin." + Environment.NewLine + Environment.NewLine + "Lütfen BADES Sistemi \"Raporlar & Bulgular > Bulgular\" menüsünden XML dosyası indirdiğinizden emin olun.", "Raporlar Menüsünden XML Dosyası İndirin", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //Aç Diyaloğu
             DlgAc.Filter = "XML Dosyaları (*.xml)|*.xml|Tüm Dosyalar (*.*)|*.*";
@@ -1373,9 +1546,6 @@ namespace bades
                 XmlDosyasi = DlgAc.FileName;
                 DokumaniYukle();
 
-                //Sorumluluk Uyarı penceresi göster
-                MessageBox.Show("Bades SX AK tarafından sunulan hizmetin kullanımı neticesinde ortaya çıkabilecek sorunlardan ya da problemlerden bu yazılımın mimarı veya mensup olduğu kurum sorumlu değildir ve sorumlu tutulamaz. Kullanıma ait tüm sorunlar ve riskler kullanıcının ya da kullanıcıların kendi şahsi sorumluluğundadır. " +
-                    "Bades SX AK'nın geliştiricisi, bu içeriğin tamlığına, bütünlüğüne, doğruluğuna, güncelliğine, kalitesine, güvenilirliğine ve kullanımı neticesinde ortaya çıkabilecek sorunlara ve bu sorunların giderilmesine ilişkin garanti vermez. ", "Sorumsuzluk Beyanı", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
     
             }
@@ -1606,6 +1776,197 @@ namespace bades
         {
             TutarsizligaGoreGrupla();
             MenuleriResetle_Click(sender);
+        }
+
+
+        private void mYonetimBeyani_Click(object sender, EventArgs e)
+        {
+            //Uygulamayı oluştur
+            object oMissing = System.Reflection.Missing.Value;
+            object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+
+            //Start Word and create a new document.
+            Word._Application oWord;
+            Word._Document oDoc;
+            oWord = new Word.Application();
+            oWord.Visible = true;
+            oDoc = oWord.Documents.Add(ref oMissing, ref oMissing,
+                ref oMissing, ref oMissing);
+
+            oDoc.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape;
+
+            //Insert a paragraph at the beginning of the document.
+            Word.Paragraph oPara1;
+            oPara1 = oDoc.Content.Paragraphs.Add(ref oMissing);
+            oPara1.Range.Text = "YÖNETİM BEYANI EK-3";
+            oPara1.Range.Font.Size = 16;
+            oPara1.Range.Font.Bold = 1;
+            oPara1.Format.SpaceAfter = 24;    //24 pt spacing after paragraph.
+            oPara1.Range.InsertParagraphAfter();
+
+            //Insert a paragraph at the end of the document.
+            Word.Paragraph oPara2;
+            object oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+            oPara2 = oDoc.Content.Paragraphs.Add(ref oRng);
+            oPara2.Range.Font.Size = 14;
+            oPara2.Range.Text = "Bağımsız Denetim Bulgularının Takibi";
+            oPara2.Format.SpaceAfter = 6;
+            oPara2.Range.InsertParagraphAfter();
+
+            //Insert another paragraph.
+            Word.Paragraph oPara3;
+            oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+            oPara3 = oDoc.Content.Paragraphs.Add(ref oRng);
+            oPara3.Range.Font.Size = 12;
+            oPara3.Range.Text = "Daha önceki bağımsız bilgi sistemleri ve bankacılık süreçleri denetimlerinde tespit edilip bankaya sunulmuş ve bağımsız denetim kuruluşu tarafından çözüldüğü onaylanmamış olan bulguların çözülüp çözülmediğine ilişkin mevcut durumuna Yönetim Beyanı ekinde yer verilmiştir.";
+            oPara3.Range.Font.Bold = 0;
+            oPara3.Format.SpaceAfter = 24;
+            oPara3.Range.InsertParagraphAfter();
+
+
+            //Insert a 5 x 2 table, fill it with data, and change the column widths.
+            Word.Table oTable;
+            Word.Range wrdRng;
+
+            wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+            oTable = oDoc.Tables.Add(wrdRng, BulguLst.Items.Count + 1, 5, ref oMissing, ref oMissing);
+            oTable.PreferredWidth = 100;
+            oTable.PreferredWidthType = Word.WdPreferredWidthType.wdPreferredWidthPercent;
+            oTable.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+            oTable.Borders.InsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
+
+            oTable.Range.ParagraphFormat.SpaceAfter = 6;
+            oTable.Range.Font.Size = 11;
+            oTable.Range.Font.Bold = 0;
+
+
+            //Sütunları yaz
+
+            oTable.Columns[1].Width = oWord.CentimetersToPoints(4);
+            oTable.Columns[2].Width = oWord.CentimetersToPoints(7);
+            oTable.Columns[3].Width = oWord.CentimetersToPoints(3);
+            oTable.Columns[4].Width = oWord.CentimetersToPoints(3);
+            oTable.Columns[5].Width = oWord.CentimetersToPoints(7);
+
+
+            /*oTable.Columns[1].SetWidth(40, Word.WdRulerStyle.wdAdjustSameWidth);
+            oTable.Columns[2].SetWidth(100, Word.WdRulerStyle.wdAdjustSameWidth);
+            oTable.Columns[3].SetWidth(30, Word.WdRulerStyle.wdAdjustSameWidth);
+            oTable.Columns[4].SetWidth(40, Word.WdRulerStyle.wdAdjustSameWidth);
+            oTable.Columns[5].SetWidth(40, Word.WdRulerStyle.wdAdjustSameWidth);
+            */
+            oTable.Cell(1, 1).Range.Text = BulguLst.Columns[0].Text;        
+            oTable.Cell(1, 2).Range.Text = BulguLst.Columns[2].Text;            
+            oTable.Cell(1, 3).Range.Text = BulguLst.Columns[4].Text;
+            oTable.Cell(1, 4).Range.Text = BulguLst.Columns[5].Text;
+            oTable.Cell(1, 5).Range.Text = BulguLst.Columns[6].Text;
+
+
+            oTable.Rows[1].Range.Font.Bold = 600;
+            oTable.Rows[1].HeadingFormat = -1;
+
+            //Metni aktar
+            //int i = 1;
+            int i2 = 2;
+            foreach (ListViewItem lvi in BulguLst.Items)
+            {
+
+                oTable.Cell(i2, 1).Range.Text = lvi.SubItems[0].Text;
+
+                //Bulgu kısaltıldığı için item text yerine tooltiptext kullanılıyor.
+                //oTable.Cell(i2, 2).Range.Text = lvi.SubItems[2].Text;
+                oTable.Cell(i2, 2).Range.Text = lvi.ToolTipText;
+                
+                oTable.Cell(i2, 3).Range.Text = lvi.SubItems[4].Text;        
+                oTable.Cell(i2, 4).Range.Text = lvi.SubItems[5].Text;
+                oTable.Cell(i2, 5).Range.Text = lvi.SubItems[6].Text;
+                i2++;
+ 
+            }
+
+            
+
+            //Add text after the chart.
+            //wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+            //wrdRng.InsertParagraphAfter();
+            //wrdRng.InsertAfter("THE END.");
+
+
+        }
+
+        private void mMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void Tab_DrawItem(object sender, System.Windows.Forms.DrawItemEventArgs e)
+        {
+            Brush TitleBrush = new SolidBrush(Color.Black);
+            Font f = this.Font;
+            string title = this.Tab.TabPages[e.Index].Text;
+            Rectangle r = e.Bounds;
+            r = this.Tab.GetTabRect(e.Index);
+            r.Offset(2, 2);
+
+
+            if (e.Index != 0)
+            {
+                try
+                {
+                    //Close Image to draw
+                    Image img = SIcons.Images[0];
+                    e.Graphics.DrawString(title, f, TitleBrush, new PointF(r.X, r.Y));
+                    e.Graphics.DrawImage(img, new Point(r.X + (this.Tab.GetTabRect(e.Index).Width - _imageLocation.X), _imageLocation.Y));
+                }
+                catch (Exception) { }
+
+            }
+            else
+            {
+                e.Graphics.DrawString(title, f, TitleBrush, new PointF(r.X, r.Y));
+            }
+        }
+
+        private void Tab_MouseClick(object sender, MouseEventArgs e)
+        {
+            TabControl tc = (TabControl)sender;
+            Point p = e.Location;
+            int _tabWidth = 0;
+            _tabWidth = this.Tab.GetTabRect(tc.SelectedIndex).Width - (_imgHitArea.X);
+            Rectangle r = this.Tab.GetTabRect(tc.SelectedIndex);
+            r.Offset(_tabWidth, _imgHitArea.Y);
+            r.Width = 16;
+            r.Height = 16;
+            if (r.Contains(p))
+            {
+                TabPage TabP = (TabPage)tc.TabPages[tc.SelectedIndex];
+                tc.TabPages.Remove(TabP);
+            } 
+        }
+
+        private void BulguLst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (BulguLst.SelectedItems.Count > 0)
+            {
+                //MessageBox.Show(BulguLst.SelectedItems[0].Index.ToString());
+                BulguListIndex = BulguLst.SelectedItems[0].Index;
+            }
+        }
+
+        private void FrmBades_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.All;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void FrmBades_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] s = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            XmlDosyasi = s[0];
+            DokumaniYukle();
+
         }
 
 

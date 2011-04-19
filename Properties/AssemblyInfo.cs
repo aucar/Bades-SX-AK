@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Bades SX AK v.1.0")]
-[assembly: AssemblyDescription("BADES sistemi için XML Ayıklama ve Kodlama aracı")]
+[assembly: AssemblyTitle("Bades SX AK v.1.2")]
+[assembly: AssemblyDescription("BADES Sistemi XML Ayıklayıcısı ve Kodlayıcısı")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ahmet UÇAR")]
 [assembly: AssemblyProduct("Bades SX AK")]
-[assembly: AssemblyCopyright("Copyright ©  2010")]
+[assembly: AssemblyCopyright("Copyright ©  2010 - 2011")]
 [assembly: AssemblyTrademark("Ahmet UÇAR")]
 [assembly: AssemblyCulture("")]
 
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("tr-TR")]
