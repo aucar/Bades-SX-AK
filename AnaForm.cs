@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * BADES SX AK 2.0 
+ * BADES SX AK 1.2 
  * BADES Sistemi için XML Ayıklama ve Kodlama Aracı 
  * 
  * Bu program BDDK tarafından geliştirilen BADES sisteminden XML alarak bu 
@@ -1540,6 +1540,7 @@ namespace bades
             //Aç Diyaloğu
             DlgAc.Filter = "XML Dosyaları (*.xml)|*.xml|Tüm Dosyalar (*.*)|*.*";
             DlgAc.Title = "BADES sisteminden indirdiğiniz XML dosyasını açınız.";
+            DlgAc.InitialDirectory = System.Reflection.Assembly.GetExecutingAssembly().Location;
 
             if (DlgAc.ShowDialog() == DialogResult.OK)
             {
@@ -1603,15 +1604,78 @@ namespace bades
             Excel.Workbook wb = app.Workbooks.Add(1);
             Excel.Worksheet ws = (Excel.Worksheet)wb.Worksheets[1];
 
-            //Metni aktar
+            //Yardımcı konular
+            object misValue = System.Reflection.Missing.Value;
+            Excel.Range rng;
+
             int i = 1;
             int i2 = 1;
+
+            //Başlıkları yaz
+            foreach (ColumnHeader grp in BulguLst.Columns)
+            {
+                ws.Cells[i2, i] = grp.Text;
+                ws.Cells[i2, i].BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThin, Excel.XlColorIndex.xlColorIndexAutomatic, 1);
+                i++;
+            }
+
+            rng = ws.get_Range("1:1");
+            rng.Font.Bold = true;
+            rng.HorizontalAlignment = 1;
+            rng.RowHeight = 36.75;
+            rng.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.DarkRed);
+            rng.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.White);
+
+
+            rng = ws.get_Range("A:A");
+            rng.ColumnWidth = 20;
+            //rng.BorderAround(Excel.XlLineStyle.xlContinuous,Excel.XlBorderWeight.xlThin,Excel.XlColorIndex.xlColorIndexAutomatic,1);
+
+            rng = ws.get_Range("B:B");
+            rng.ColumnWidth = 26;
+
+            rng = ws.get_Range("C:C");
+            rng.ColumnWidth = 50;
+
+            rng = ws.get_Range("D:D");
+            rng.ColumnWidth = 13;
+
+            rng = ws.get_Range("E:E");
+            rng.ColumnWidth = 12;
+
+            rng = ws.get_Range("F:F");
+            rng.ColumnWidth = 12;
+
+            rng = ws.get_Range("G:G");
+            rng.ColumnWidth = 45;
+
+            rng = ws.get_Range("H:H");
+            rng.ColumnWidth = 40;
+
+            rng = ws.get_Range("A:H");
+            rng.WrapText = true;
+            rng.VerticalAlignment = 1;
+
+            //Metni aktar
+            i2++;
             foreach (ListViewItem lvi in BulguLst.Items)
             {
                 i = 1;
+
                 foreach (ListViewItem.ListViewSubItem lvs in lvi.SubItems)
                 {
-                    ws.Cells[i2, i] = lvs.Text;
+
+                    if (i != 3)
+                    {
+                        ws.Cells[i2, i] = lvs.Text;
+                    }
+                    else
+                    {
+                        ws.Cells[i2, i] = lvi.ToolTipText;
+                    }
+
+                    ws.Cells[i2, i].BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThin, Excel.XlColorIndex.xlColorIndexAutomatic, 1);
+
                     i++;
                 }
                 i2++;

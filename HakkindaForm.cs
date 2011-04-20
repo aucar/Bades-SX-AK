@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * BADES SX AK 2.0 
+ * BADES SX AK 1.2 
  * BADES Sistemi için XML Ayıklama ve Kodlama Aracı 
  * 
  * Bu program BDDK tarafından geliştirilen BADES sisteminden XML alarak bu 
